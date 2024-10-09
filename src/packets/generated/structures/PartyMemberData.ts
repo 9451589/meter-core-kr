@@ -1,0 +1,50 @@
+// Auto Generated, do not edit.
+import type { Read } from "../../stream";
+import * as ReadNBytesInt64 from "../../common/ReadNBytesInt64";
+import * as Vector3F from "../../common/Vector3F";
+export type PartyMemberData = {
+  gearLevel: number;
+  classId: number;
+  partyMemberNumber: number;
+  unk3: number;
+  unk4: number;
+  position: Vector3F.Vector3F;
+  zoneId: number;
+  name: string;
+  unk8: number;
+  characterId: bigint;
+  auths: number;
+  maxHp: bigint;
+  worldId: number;
+  transitIndex: number;
+  curHp: bigint;
+  unk15: number;
+  zoneInstId: bigint;
+  unk17: number;
+  characterLevel: number;
+  unk19: number;
+};
+export function read(reader: Read) {
+  const data = {} as PartyMemberData;
+  data.maxHp = ReadNBytesInt64.read(reader);
+  data.unk8 = reader.u8();
+  data.unk3 = reader.u8();
+  data.unk4 = reader.u8();
+  data.transitIndex = reader.u32();
+  data.partyMemberNumber = reader.u8();
+  data.classId = reader.u16();
+  data.gearLevel = reader.f32();
+  data.unk15 = reader.u8();
+  data.auths = reader.u8();
+  data.unk19 = reader.u16();
+  data.zoneId = reader.u32();
+  data.characterId = reader.u64();
+  data.curHp = ReadNBytesInt64.read(reader);
+  data.name = reader.string(20);
+  data.zoneInstId = reader.u64();
+  data.position = Vector3F.read(reader);
+  data.characterLevel = reader.u16();
+  data.unk17 = reader.u8();
+  data.worldId = reader.u8();
+  return data;
+}

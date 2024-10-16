@@ -17,6 +17,7 @@ export type StatusEffectData = {
 };
 export function read(reader: Read) {
   const data = {} as StatusEffectData;
+  
   data.sourceId = reader.u64();
   data.statusEffectId = reader.u32();
   data.stackCount = reader.u8();

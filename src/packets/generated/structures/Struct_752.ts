@@ -12,18 +12,21 @@ export type Struct_752 = {
   lookData: Buffer;
   unk8: bigint;
   unk9: number;
+  unk10: number;
 };
 export function read(reader: Read) {
   const data = {} as Struct_752;
   data.unk2 = reader.u8();
-  data.lookData = reader.bytes(reader.u32(), 512);
-  data.equipItemDataList = reader.array(reader.u16(), () => EquipItemData.read(reader), 33);
   data.unk1 = reader.u64();
   data.unk8 = reader.u64();
-  data.unk9 = reader.u16();
+  data.equipItemDataList = reader.array(reader.u16(), () => EquipItemData.read(reader), 33);
   data.unk3 = reader.u8();
+  data.lookData = reader.bytes(reader.u32(), 512);
   data.unk4 = reader.u64();
-  data.lostArkString = reader.string(20);
   data.unk6 = reader.u8();
+  data.lostArkString = reader.string(20);
+  data.unk9 = reader.u16();
+  data.unk10 = reader.u8();
+  
   return data;
 }

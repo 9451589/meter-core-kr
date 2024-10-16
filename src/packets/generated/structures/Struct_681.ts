@@ -21,17 +21,17 @@ export function read(reader: Read) {
   const data = {} as Struct_681;
   data.unk3 = reader.u32();
   data.struct_302 = reader.bytes(reader.u16(), 10, 18);
-  data.struct_262 = reader.bytes(reader.u16(), 2, 9);
-  data.struct_238 = reader.array(reader.u16(), () => Struct_674.read(reader), 3);
-  data.struct_149 = reader.bytes(reader.u16(), 10, 9);
-  data.unk6 = reader.u8();
-  data.unk9 = reader.u32();
-  data.struct_403 = reader.bytes(reader.u16(), 2, 10);
-  data.unk5 = reader.u64();
-  data.unk10 = reader.u32();
-  data.unk8 = reader.u32();
-  data.unk11 = reader.u32();
-  data.unk12 = reader.u32();
   data.unk13 = reader.u16();
+  data.struct_149 = reader.bytes(reader.u16(), 10, 9);
+  data.unk9 = reader.u32();
+  data.unk10 = reader.u32();
+  data.struct_403 = reader.bytes(reader.u16(), 2, 10);
+  data.unk8 = reader.u32();
+  data.unk5 = reader.u64();
+  data.struct_238 = reader.array(reader.u16(), () => Struct_674.read(reader), 3);
+  data.unk11 = reader.u32();
+  data.struct_262 = reader.bytes(reader.u16(), 2, 9);
+  data.unk12 = reader.u32();
+  data.unk6 = reader.u16();
   return data;
 }

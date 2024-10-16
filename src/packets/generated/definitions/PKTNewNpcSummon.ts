@@ -9,12 +9,12 @@ export type PKTNewNpcSummon = {
 export function read(buf: Buffer) {
   const reader = new Read(buf);
   const data = {} as PKTNewNpcSummon;
-  data.npcData = NpcData.read(reader);
-  reader.skip(23);
-  data.ownerId = reader.u64();
-  reader.skip(12);
   data.publishReason = reader.u8();
+  reader.skip(27);
+  data.ownerId = reader.u64();
+  reader.skip(8);
+  data.npcData = NpcData.read(reader);
   return data;
 }
 export const name = "PKTNewNpcSummon";
-export const opcode = 0;
+export const opcode = 0x798b;

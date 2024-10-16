@@ -12,12 +12,12 @@ export type PeriodUpdateStatData = {
 };
 export function read(reader: Read) {
   const data = {} as PeriodUpdateStatData;
-  data.unk6 = reader.u8();
-  data.unk4 = reader.u64();
+  data.unk0 = reader.u8();
+  data.unk2 = reader.u8();
   data.unk1 = reader.u16();
   data.unk3 = ReadNBytesInt64.read(reader);
-  data.unk2 = reader.u8();
+  data.unk6 = reader.u8();
   data.unk5 = ReadNBytesInt64.read(reader);
-  data.unk0 = reader.u8();
+  data.unk4 = reader.u64();
   return data;
 }

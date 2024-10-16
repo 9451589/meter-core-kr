@@ -15,17 +15,17 @@ export type PKTDeathNotify = {
 export function read(buf: Buffer) {
   const reader = new Read(buf);
   const data = {} as PKTDeathNotify;
-  if (reader.bool()) data.deathType = reader.u8();
-  if (reader.bool()) data.damageAttr = reader.u8();
-  data.durabilityDecrement = reader.u8();
-  data.effectId = reader.u32();
-  data.directionYaw = reader.u16();
-  data.unk0_m = reader.u64();
-  data.sourceId = reader.u64();
-  data.targetId = reader.u64();
   if (reader.bool()) data.abnormalStatusType = reader.u8();
+  data.effectId = reader.u32();
+  data.durabilityDecrement = reader.u8();
+  data.directionYaw = reader.u16();
   data.unk2_m = reader.u32();
+  data.targetId = reader.u64();
+  if (reader.bool()) data.damageAttr = reader.u8();
+  data.sourceId = reader.u64();
+  data.unk0_m = reader.u64();
+  if (reader.bool()) data.deathType = reader.u8();
   return data;
 }
 export const name = "PKTDeathNotify";
-export const opcode = 0;
+export const opcode = 0x7b9e;

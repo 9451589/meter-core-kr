@@ -12,12 +12,12 @@ export type EquipItemData = {
 };
 export function read(reader: Read) {
   const data = {} as EquipItemData;
-  data.expireTime = LostArkDateTime.read(reader);
-  data.itemTint = reader.bytes(reader.u16(), 5, 14);
   if (reader.bool()) data.unk7_0 = reader.u8();
+  data.expireTime = LostArkDateTime.read(reader);
   data.slot = reader.u16();
-  data.unk5 = reader.u8();
   data.id = reader.u32();
+  data.unk5 = reader.u8();
+  data.itemTint = reader.bytes(reader.u16(), 5, 14);
   data.level = reader.u16();
   return data;
 }

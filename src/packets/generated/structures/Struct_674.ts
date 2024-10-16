@@ -13,13 +13,13 @@ export type Struct_674 = {
 };
 export function read(reader: Read) {
   const data = {} as Struct_674;
-  data.unk5 = reader.u8();
   data.unk4 = reader.u32();
   data.struct_147 = Struct_147.read(reader);
-  data.unk3 = reader.u8();
+  data.unk5 = reader.u8();
   data.struct_148 = reader.bytes(reader.u16(), 3, 9);
+  data.unk7 = reader.u32();
+  data.unk3 = reader.u8();
   data.unk6 = reader.u8();
   data.unk0 = reader.u8();
-  data.unk7 = reader.u32();
   return data;
 }

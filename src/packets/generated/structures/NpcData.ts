@@ -14,7 +14,7 @@ export type NpcData = {
   typeId: number;
   unk8_0?: number;
   unk10_0?: number;
-  struct_50?: { unk1_0_0: number; unk1_0_1: bigint; unk1_0_2: bigint; unk1_0_3: bigint }[];
+  struct_50?: { unk1_0_0: number; unk1_0_1: bigint; unk1_0_2: bigint; unk1_0_3: bigint; unk1_0_4?: Buffer }[];
   statPair: { value: bigint; statType: number }[];
   periodUpdateStatDataList: PeriodUpdateStatData.PeriodUpdateStatData[];
   unk15_0?: number;
@@ -30,8 +30,6 @@ export type NpcData = {
   unk31_0?: number;
   unk33_0?: number;
   unk35_0?: number;
-  unk36: number;
-  unk37: number;
   level: number;
   transitIndex?: number;
   unk42_0?: number;
@@ -48,27 +46,13 @@ export function read(reader: Read) {
   const data = {} as NpcData;
   if (reader.bool()) data.unk8_0 = reader.u8();
   data.unk20 = reader.u8();
-  if (reader.bool()) data.unk29_0 = reader.u16();
-  data.position = Vector3F.read(reader);
   if (reader.bool()) data.unk15_0 = reader.u8();
-  if (reader.bool()) data.unk10_0 = reader.u8();
-  if (reader.bool()) data.unk27_0 = reader.u32();
-  data.directionYaw = Angle.read(reader);
-  if (reader.bool()) data.unk3_0 = reader.u8();
-  if (reader.bool()) data.unk33_0 = reader.u8();
-  data.periodUpdateStatDataList = reader.array(reader.u16(), () => PeriodUpdateStatData.read(reader), 5);
-  data.objectId = reader.u64();
-  data.unk4 = reader.u8();
-  if (reader.bool()) data.unk42_0 = reader.u8();
+  if (reader.bool()) data.balanceLevel = reader.u16();
+  data.statusEffectDatas = reader.array(reader.u16(), () => StatusEffectData.read(reader), 80);
   data.unk22 = reader.u8();
   data.unk21 = reader.u8();
-  data.typeId = reader.u32();
-  if (reader.bool()) data.transitIndex = reader.u32();
-  if (reader.bool()) data.balanceLevel = reader.u16();
-  if (reader.bool()) data.unk19_0 = reader.u32();
-  if (reader.bool()) data.struct_752 = Struct_752.read(reader);
-  data.unk36 = reader.u8();
-  if (reader.bool()) data.unk45_0 = reader.u64();
+  data.spawnIndex = reader.u32();
+  if (reader.bool()) data.unk29_0 = reader.u16();
   data.statPair = reader.array(
     reader.u16(),
     () => {
@@ -79,28 +63,41 @@ export function read(reader: Read) {
     },
     153
   );
-  data.unk37 = reader.u8();
+  if (reader.bool()) data.transitIndex = reader.u32();
+  data.periodUpdateStatDataList = reader.array(reader.u16(), () => PeriodUpdateStatData.read(reader), 5);
+  data.typeId = reader.u32();
+  if (reader.bool()) data.struct_752 = Struct_752.read(reader);
+  if (reader.bool()) data.unk10_0 = reader.u8();
+  if (reader.bool()) data.unk3_0 = reader.u8();
+  if (reader.bool()) data.unk33_0 = reader.u8();
+  if (reader.bool()) data.unk42_0 = reader.u8();
+  data.position = Vector3F.read(reader);
+  data.directionYaw = Angle.read(reader);
+  if (reader.bool()) data.unk27_0 = reader.u32();
+  if (reader.bool()) data.struct_343 = reader.bytes(reader.u16(), 11, 9);
+  data.level = reader.u16();
   if (reader.bool() /*unk0*/) {
     data.struct_50 = reader.array(
       reader.u16(),
       () => {
-        const E = {} as { unk1_0_0: number; unk1_0_1: bigint; unk1_0_2: bigint; unk1_0_3: bigint };
+        const E = {} as { unk1_0_0: number; unk1_0_1: bigint; unk1_0_2: bigint; unk1_0_3: bigint;  unk1_0_4?: Buffer };
+        E.unk1_0_0 = reader.u8();
+        if (reader.bool()) E.unk1_0_4 = reader.bytes(32);
         E.unk1_0_1 = ReadNBytesInt64.read(reader);
         E.unk1_0_2 = ReadNBytesInt64.read(reader);
-        E.unk1_0_0 = reader.u8();
         E.unk1_0_3 = ReadNBytesInt64.read(reader);
         return E;
       },
       16
     );
   }
-  if (reader.bool()) data.struct_343 = reader.bytes(reader.u16(), 11, 9);
-  data.spawnIndex = reader.u32();
+  if (reader.bool()) data.unk19_0 = reader.u32();
   if (reader.bool()) data.unk31_0 = reader.u32();
-  if (reader.bool()) data.unk47_0 = reader.u8();
-  data.statusEffectDatas = reader.array(reader.u16(), () => StatusEffectData.read(reader), 80);
   if (reader.bool()) data.unk35_0 = reader.u32();
-  data.level = reader.u16();
-  if (reader.bool()) data.struct_275 = reader.bytes(reader.u16(), 12, 12);
+  if (reader.bool()) data.unk47_0 = reader.u8();
+  if (reader.bool()) data.struct_275 = reader.bytes(reader.u16(), 16, 12);
+  if (reader.bool()) data.unk45_0 = reader.u64();
+  data.objectId = reader.u64();
+  data.unk4 = reader.u8();
   return data;
 }

@@ -10,8 +10,8 @@ export type Struct_809 = {
 export function read(reader: Read) {
   const data = {} as Struct_809;
   data.unk2 = reader.bytes(reader.u16(), 7);
-  data.unk4 = reader.bytes(reader.u16(), 7);
   data.unk3 = reader.u8();
+  data.unk4 = reader.bytes(reader.u16(), 7);
   if (reader.bool()) data.struct_768 = Struct_768.read(reader);
   return data;
 }

@@ -8,9 +8,9 @@ export type TrackMoveInfo = {
 };
 export function read(reader: Read) {
   const data = {} as TrackMoveInfo;
-  if (reader.bool()) data.unk4_0 = reader.bytes(12);
   data.unk0 = reader.u32();
-  data.unk1 = reader.bytes(12);
+  if (reader.bool()) data.unk4_0 = reader.bytes(12);
   data.unk2 = reader.u32();
+  data.unk1 = reader.bytes(12);
   return data;
 }

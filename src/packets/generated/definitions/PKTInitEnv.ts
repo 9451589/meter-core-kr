@@ -14,9 +14,12 @@ export type PKTInitEnv = {
 export function read(buf: Buffer) {
   const reader = new Read(buf);
   const data = {} as PKTInitEnv;
+  data.unk3 = reader.u32();
+  data.unk5 = reader.u32();
+  data.lostArkDateTime = LostArkDateTime.read(reader);
+  data.struct_609 = reader.string(128);
   data.unk7 = reader.u64();
   data.playerId = reader.u64();
-  data.lostArkDateTime = LostArkDateTime.read(reader);
   data.struct_31 = reader.array(
     reader.u16(),
     () => {
@@ -28,11 +31,8 @@ export function read(buf: Buffer) {
     },
     64
   );
-  data.unk5 = reader.u32();
-  data.struct_609 = reader.string(128);
   data.unk1 = reader.u8();
-  data.unk3 = reader.u32();
   return data;
 }
 export const name = "PKTInitEnv";
-export const opcode = 0;
+export const opcode = 0x546d;
